@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Growth — Tinsight</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808; --red: #dc2626; --red-dim: rgba(220,38,38,0.1);
+    --white: #f0f0f0; --grey: #141414; --muted: #444; --border: #1a1a1a;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.5; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .nav-logo-t { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 28px; color: var(--white); line-height: 1; display: flex; align-items: flex-end; }
+  .nav-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; margin-bottom: 5px; margin-left: 1px; }
+  .nav-name { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 5px; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
+  .back-btn { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 10px 20px; transition: all 0.2s; }
+  .back-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* HERO */
+  .page-hero { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 24px 80px; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; font-family: 'Oswald', sans-serif; font-size: clamp(80px, 20vw, 220px); font-weight: 700; color: rgba(255,255,255,0.02); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; }
+  .hero-glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(220,38,38,0.07) 0%, transparent 65%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: breathe 5s ease-in-out infinite; }
+  @keyframes breathe { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.2)} }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); padding: 8px 20px; margin-bottom: 28px; position: relative; z-index: 1; animation: fadeUp 0.7s ease both; }
+  .hero-badge-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-badge span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+  .page-title { font-family: 'Oswald', sans-serif; font-size: clamp(48px, 9vw, 96px); font-weight: 700; line-height: 0.92; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 24px; position: relative; z-index: 1; animation: fadeUp 0.7s 0.1s ease both; }
+  .page-title em { color: var(--red); font-style: normal; }
+  .page-sub { font-size: 16px; color: #555; font-weight: 300; max-width: 480px; line-height: 1.8; position: relative; z-index: 1; animation: fadeUp 0.7s 0.2s ease both; }
+
+  /* SECTIONS */
+  .section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .sec-tag { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: 4px; color: var(--red); text-transform: uppercase; margin-bottom: 16px; }
+  .sec-tag::before { content: ''; width: 28px; height: 1px; background: var(--red); }
+  .sec-title { font-family: 'Oswald', sans-serif; font-size: clamp(30px, 4vw, 48px); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 16px; }
+  .sec-title em { color: var(--red); font-style: normal; }
+  .sec-sub { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.8; max-width: 560px; margin-bottom: 56px; }
+
+  /* WHAT'S INCLUDED */
+  .includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .include-card { background: var(--black); padding: 36px 28px; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; position: relative; overflow: hidden; }
+  .include-card.visible { opacity: 1; transform: translateY(0); }
+  .include-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .include-card:hover::after { transform: scaleX(1); }
+  .include-icon { font-size: 24px; margin-bottom: 16px; }
+  .include-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .include-desc { font-size: 13px; color: #4a4a4a; line-height: 1.8; font-weight: 300; }
+
+  /* PROCESS */
+  .process-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+  .process-step { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid var(--border); opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+  .process-step:last-child { border-bottom: none; }
+  .process-step.visible { opacity: 1; transform: translateX(0); }
+  .step-num { font-family: 'Oswald', sans-serif; font-size: 32px; font-weight: 700; color: rgba(220,38,38,0.15); padding: 32px 24px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border); }
+  .step-content { padding: 32px; }
+  .step-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: #4a4a4a; line-height: 1.8; font-weight: 300; }
+
+  /* FOR WHO */
+  .who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .who-card { background: var(--black); padding: 32px 24px; text-align: center; opacity: 0; transform: translateY(16px); transition: all 0.4s ease; }
+  .who-card.visible { opacity: 1; transform: translateY(0); }
+  .who-emoji { font-size: 32px; margin-bottom: 12px; }
+  .who-title { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--white); }
+
+  /* CTA */
+  .cta-section { background: #0a0a0a; border-top: 1px solid var(--border); text-align: center; padding: 100px 24px; position: relative; overflow: hidden; }
+  .cta-bg { position: absolute; font-family: 'Oswald', sans-serif; font-size: clamp(60px, 18vw, 180px); font-weight: 700; color: rgba(255,255,255,0.015); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; }
+  .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+  .cta-title { font-family: 'Oswald', sans-serif; font-size: clamp(36px, 6vw, 64px); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+  .cta-title em { color: var(--red); font-style: normal; }
+  .cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 48px; font-weight: 300; }
+  .cta-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary { background: var(--red); color: var(--white); font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 16px 40px; transition: transform 0.2s, opacity 0.2s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-outline { border: 1px solid var(--border); color: var(--muted); font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 16px 40px; transition: border-color 0.2s, color 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+  footer { padding: 24px 40px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 10px; letter-spacing: 2px; color: #222; text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .section { padding: 60px 20px; }
+    .process-step { grid-template-columns: 50px 1fr; }
+    .step-num { font-size: 20px; padding: 20px 12px; }
+    footer { padding: 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div>
+      <div class="nav-logo-t">T<div class="nav-dot"></div></div>
+      <div class="nav-name">Tinsight</div>
+    </div>
+  </a>
+  <a href="index.html#services" class="back-btn">← Back to Services</a>
+</nav>
+
+
+<div class="page-hero">
+  <div class="hero-bg">GROWTH</div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div><span>Service 03</span></div>
+  <h1 class="page-title">Build a Brand<br>That Lasts<br><em>Forever.</em></h1>
+  <p class="page-sub">Growth isn't just followers. It's authority, trust, and a brand identity so strong that people recognise you before they even see your name.</p>
+</div>
+
+<div style="border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section">
+    <div class="sec-tag">What's Included</div>
+    <h2 class="sec-title">Long-Term Growth.<br><em>Real Results.</em></h2>
+    <p class="sec-sub">We handle everything that makes a brand grow consistently — not just spike once and fade.</p>
+    <div class="includes-grid">
+      <div class="include-card"><div class="include-icon">🎨</div><div class="include-title">Visual Identity</div><div class="include-desc">Consistent colours, fonts, and aesthetics across every piece of content so your brand is instantly recognisable.</div></div>
+      <div class="include-card"><div class="include-icon">📱</div><div class="include-title">Profile Optimisation</div><div class="include-desc">Bio, highlights, grid layout — every element of your profile optimised to convert visitors into followers and followers into clients.</div></div>
+      <div class="include-card"><div class="include-icon">🔁</div><div class="include-title">Consistent Posting</div><div class="include-desc">Regular, high-quality Reels that keep your audience engaged and signal to the algorithm that your account is active.</div></div>
+      <div class="include-card"><div class="include-icon">🤝</div><div class="include-title">Community Building</div><div class="include-desc">Strategy for engaging your audience, building trust, and turning followers into a loyal community around your brand.</div></div>
+      <div class="include-card"><div class="include-icon">📣</div><div class="include-title">Authority Positioning</div><div class="include-desc">Content that positions you as the go-to expert in your niche — so clients come to you instead of you chasing them.</div></div>
+      <div class="include-card"><div class="include-icon">📈</div><div class="include-title">Monthly Reports</div><div class="include-desc">Clear performance reports showing your growth, what's working, and what we're optimising for next month.</div></div>
+    </div>
+  </div>
+</div>
+
+<div style="background:#0a0a0a; border-bottom:1px solid var(--border);">
+  <div class="section">
+    <div class="sec-tag">Our Process</div>
+    <h2 class="sec-title">Growth That's<br><em>Built to Last</em></h2>
+    <p class="sec-sub">No shortcuts. No fake followers. Just real, sustainable brand growth.</p>
+    <div class="process-list">
+      <div class="process-step"><div class="step-num">01</div><div class="step-content"><div class="step-title">Brand Assessment</div><div class="step-desc">We evaluate your current brand presence, identify gaps, and set clear growth targets for the next 90 days.</div></div></div>
+      <div class="process-step"><div class="step-num">02</div><div class="step-content"><div class="step-title">Identity Development</div><div class="step-desc">We establish or refine your visual identity and brand voice — the foundation everything else is built on.</div></div></div>
+      <div class="process-step"><div class="step-num">03</div><div class="step-content"><div class="step-title">Content Execution</div><div class="step-desc">Consistent Reels production, posting, and optimisation — all handled with precision and intention every week.</div></div></div>
+      <div class="process-step"><div class="step-num">04</div><div class="step-content"><div class="step-title">Review & Scale</div><div class="step-desc">Monthly performance review, strategy refinement, and scaling what works to accelerate your growth trajectory.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div style="border-bottom:1px solid var(--border);">
+  <div class="section">
+    <div class="sec-tag">Who This Is For</div>
+    <h2 class="sec-title">For Brands Playing<br>The <em>Long Game</em></h2>
+    <p class="sec-sub">This is for serious brands that want sustainable growth — not a one-time viral moment.</p>
+    <div class="who-grid">
+      <div class="who-card"><div class="who-emoji">🏢</div><div class="who-title">Established Businesses</div></div>
+      <div class="who-card"><div class="who-emoji">🚀</div><div class="who-title">Scaling Startups</div></div>
+      <div class="who-card"><div class="who-emoji">🎙️</div><div class="who-title">Personal Brands</div></div>
+      <div class="who-card"><div class="who-emoji">🛒</div><div class="who-title">Product Brands</div></div>
+      <div class="who-card"><div class="who-emoji">💡</div><div class="who-title">Thought Leaders</div></div>
+      <div class="who-card"><div class="who-emoji">🌍</div><div class="who-title">Nigerian Entrepreneurs</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <div class="cta-bg">GROW</div>
+  <div class="cta-inner">
+    <div class="sec-tag" style="justify-content:center"><span style="width:28px;height:1px;background:var(--red);display:block"></span>Ready?</div>
+    <h2 class="cta-title">Start Building<br>Something <em>Timeless.</em></h2>
+    <p class="cta-sub">Your brand deserves to outlast the trend. Let's build it right — together.</p>
+    <div class="cta-btns">
+      <a href="https://t.me/timeless_01insight" target="_blank" class="btn-primary">DM on Telegram</a>
+      <a href="https://wa.me/2348128954826" target="_blank" class="btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <p>© 2025 Tinsight · Nigerian Reels Studio</p>
+  <p>Built with intention. Just like your content.</p>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.include-card, .process-step, .who-card').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
